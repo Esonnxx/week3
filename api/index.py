@@ -43,7 +43,7 @@ def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
 
-    current_question = len(answers) + 1
+    current_question = len(answers) 
 
     if current_question <= len(questions):
         answers[current_question] = user_message
