@@ -35,7 +35,7 @@ def handle_follow(event):
 
     # Customize your Buttons Template with an image here
     buttons_template = ButtonsTemplate(
-        thumbnail_image_url="https://example.com/image.jpg",  # Replace with your image URL
+        thumbnail_image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
         title="Welcome to the ChatBot!",
         text="Please choose an option:",
         actions=[
