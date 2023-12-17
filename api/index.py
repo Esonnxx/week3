@@ -1,15 +1,13 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, QuickReply, QuickReplyButton, MessageAction
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
 import os
 
 app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
-
-# 設定問題與答案的字典
 
 # domain root
 @app.route('/')
@@ -37,21 +35,29 @@ def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
 
-    quick_reply_buttons = [
-        QuickReplyButton(action=MessageAction(label="Option 1", text="Option 1")),
-        QuickReplyButton(action=MessageAction(label="Option 2", text="Option 2")),
-        # Add more buttons as needed
-    ]
+    if user_message == "我同意":
+        # Customize your options after user agrees
+        quick_reply_buttons = [
+            QuickReplyButton(action=MessageAction(label="Option 1", text="Option 1")),
+            QuickReplyButton(action=MessageAction(label="Option 2", text="Option 2")),
+            # Add more buttons as needed
+        ]
 
-    quick_reply_message = TextSendMessage(
-        text="Choose an option:",
-        quick_reply=QuickReply(items=quick_reply_buttons)
-    )
+        quick_reply_message = TextSendMessage(
+            text="Choose an option:",
+            quick_reply=QuickReply(items=quick_reply_buttons)
+        )
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        quick_reply_message
-    )
+        line_bot_api.reply_message(
+            event.reply_token,
+            quick_reply_message
+        )
+    else:
+        # Handle other messages or provide instructions
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="Please type '我同意' to proceed.")
+        )
 
 if __name__ == "__main__":
     app.run()
