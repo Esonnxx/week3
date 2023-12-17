@@ -10,13 +10,7 @@ line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 
 # 設定問題與答案的字典
-questions = {
-    1: "避免你與人界接觸過少，請你列出可以聽你說話的名單，給自己在喪失陽氣前留一條退路。",
-    2: "你傷心的時候，前任怎麼安慰你？擁抱   傳訊息說等他忙完後去找你   他說一切都會變好   會主動做些事說你小題大作他直接消失",
-    3: "你會做些甚麼避免自己憂傷沉淪？",
-    4: "🗝如果的是"
-}
-answers = {}
+
 # domain root
 @app.route('/')
 def home():
@@ -43,26 +37,21 @@ def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
 
-    current_question = len(answers) 
+    quick_reply_buttons = [
+        QuickReplyButton(action=MessageAction(label="Option 1", text="Option 1")),
+        QuickReplyButton(action=MessageAction(label="Option 2", text="Option 2")),
+        # Add more buttons as needed
+    ]
 
-    if current_question <= len(questions):
-        answers[current_question] = user_message
-        next_question = questions.get(current_question + 1)
+    quick_reply_message = TextSendMessage(
+        text="Choose an option:",
+        quick_reply=QuickReply(items=quick_reply_buttons)
+    )
 
-        if next_question:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=next_question)
-            )
-        else:
-            # 所有問題都已回答，可以在這裡進行其他操作
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="🗝如果的是")
-            )
-    else:
-        # 多餘的回答或其他處理方式
-        pass
+    line_bot_api.reply_message(
+        event.reply_token,
+        quick_reply_message
+    )
 
 if __name__ == "__main__":
     app.run()
