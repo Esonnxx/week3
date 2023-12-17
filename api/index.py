@@ -108,7 +108,8 @@ def handle_follow(event):
         actions=[
             MessageTemplateAction(label='同意', text='同意'),
             MessageTemplateAction(label='不同意', text='不同意'),
-        ]
+        ],
+         image_aspect_ratio="rectangle"
     )
 
     template_message = TemplateSendMessage(
