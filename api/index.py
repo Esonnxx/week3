@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, QuickReply, QuickReplyButton, MessageAction
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ButtonsTemplate, TemplateSendMessage, PostbackAction
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
 import os
 
@@ -30,34 +30,41 @@ def callback():
     return 'OK'
 
 @line_handler.add(FollowEvent)
+def handle_follow(event):
+    user_id = event.source.user_id
+
+    # Customize your Buttons Template with an image here
+    buttons_template = ButtonsTemplate(
+        thumbnail_image_url="https://example.com/image.jpg",  # Replace with your image URL
+        title="Welcome to the ChatBot!",
+        text="Please choose an option:",
+        actions=[
+            PostbackAction(label="Agree", data="action=agree"),
+            PostbackAction(label="Disagree", data="action=disagree"),
+        ]
+    )
+
+    template_message = TemplateSendMessage(
+        alt_text="Welcome to the ChatBot!",
+        template=buttons_template
+    )
+
+    # Send the Buttons Template message to the user
+    line_bot_api.reply_message(
+        event.reply_token,
+        template_message
+    )
+
 @line_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
 
-    if user_message == "我同意":
-        # Customize your options after user agrees
-        quick_reply_buttons = [
-            QuickReplyButton(action=MessageAction(label="Option 1", text="Option 1")),
-            QuickReplyButton(action=MessageAction(label="Option 2", text="Option 2")),
-            # Add more buttons as needed
-        ]
-
-        quick_reply_message = TextSendMessage(
-            text="Choose an option:",
-            quick_reply=QuickReply(items=quick_reply_buttons)
-        )
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            quick_reply_message
-        )
-    else:
-        # Handle other messages or provide instructions
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="Please type '我同意' to proceed.")
-        )
+    # Handle other messages or provide instructions
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="Please wait for the welcome message.")
+    )
 
 if __name__ == "__main__":
     app.run()
