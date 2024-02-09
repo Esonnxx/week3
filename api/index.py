@@ -39,8 +39,8 @@ def handle_follow(event):
         ImageCarouselColumn(
             image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
             action=MessageTemplateAction(
-                label='play',
-                text='play'
+                label='Play',
+                text='Play'
             )
         ),
     ]
@@ -62,6 +62,13 @@ def handle_follow(event):
 def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
+
+    if user_message == "Play":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="每個人在經歷被分手都會有不同的反應，因此請您思考一下自己的個性，選擇一個符合您自己的靈種，他將會映射出您自己。")
+        )
+
 
     if user_message == "同意":
         # Customize your Carousel Template here
