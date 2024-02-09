@@ -70,11 +70,27 @@ def text_checker(event):
         event.reply_token,
         TextSendMessage(text="不愧是愁靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     )
+        buttons_template = ButtonsTemplate(
+            title="1",
+            text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
+            actions=[
+                 URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                MessageTemplateAction(label="世間美好", text="世間美好"),
+            ]
+        )
     elif len(user_msg) >= 7 and user_msg[0] == "我" and user_msg[5] == "曾":
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="不愧是損靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     )
+        buttons_template = ButtonsTemplate(
+            title="1",
+            text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
+            actions=[
+                 URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                MessageTemplateAction(label="世間美好", text="世間美好"),
+            ]
+        )
 
 @line_handler.add(FollowEvent)
 def handle_follow(event):
