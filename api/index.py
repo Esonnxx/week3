@@ -59,6 +59,24 @@ def handle_follow(event):
    
 
 @line_handler.add(MessageEvent, message=TextMessage)
+
+def text_checker(event):
+    user_msg=event.message.text
+    if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="怨靈")
+    )
+    elif len(user_msg) >= 7 and user_msg[4] == "生" and user_msg[5] == "命":
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="愁靈")
+    )
+    elif len(user_msg) >= 7 and user_msg[0] == "我" and user_msg[5] == "曾":
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="損靈")
+    )
 def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
@@ -105,6 +123,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
+        text_checker(event)
     if user_message == "愁靈":
         textlist = []
         first_text = "愁靈好啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
@@ -115,6 +134,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
+        text_checker(event)
     if user_message == "損靈":
         textlist = []
         first_text = "損靈呀，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
@@ -125,6 +145,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
+        text_checker(event)
 
     # 建立 Template Message 包含 Image Carousel Template
     template_message = TemplateSendMessage(
