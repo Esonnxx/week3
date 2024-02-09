@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ButtonsTemplate, TemplateSendMessage, MessageTemplateAction, CarouselTemplate, CarouselColumn
+from linebot.models import ImageCarouselTemplate,MessageEvent, TextMessage, TextSendMessage, ButtonsTemplate, TemplateSendMessage, MessageTemplateAction, CarouselTemplate, CarouselColumn,ImageCarouselColumn
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
 import os
 
@@ -33,28 +33,30 @@ def callback():
 def handle_follow(event):
     user_id = event.source.user_id
 
-    # Customize your Buttons Template with an image here
-    buttons_template = ButtonsTemplate(
-        thumbnail_image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
-        title="Welcome to the ChatBot!",
-        text="Please choose an option:",
-        actions=[
-            MessageTemplateAction(label='同意', text='同意'),
-            MessageTemplateAction(label='不同意', text='不同意'),
-        ],
-        image_aspect_ratio="rectangle"  # or "square"
-    )
-
+    # Define Image Carousel Template
+    image_carousel_template = ImageCarouselTemplate(
+    columns=[
+        ImageCarouselColumn(
+            image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
+            action=MessageTemplateAction(
+                label='play',
+                text='play'
+            )
+        ),
+    ]
+)
+# Create Template Message with Image Carousel Template
     template_message = TemplateSendMessage(
         alt_text="Welcome to the ChatBot!",
-        template=buttons_template
+        template=image_carousel_template
     )
 
-    # Send the Buttons Template message to the user
+# Send the Image Carousel Template message to the user
     line_bot_api.reply_message(
-        event.reply_token,
-        template_message
-    )
+    event.reply_token,
+    template_message
+)
+   
 
 @line_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
