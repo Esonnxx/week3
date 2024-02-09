@@ -1,7 +1,17 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import ImageCarouselTemplate,MessageEvent, TextMessage, TextSendMessage, ButtonsTemplate, TemplateSendMessage, MessageTemplateAction, CarouselTemplate, CarouselColumn,ImageCarouselColumn
+from linebot.models import (ImageCarouselTemplate,
+MessageEvent, 
+TextMessage,
+TextSendMessage, 
+ButtonsTemplate, 
+TemplateSendMessage, 
+MessageTemplateAction, 
+CarouselTemplate, 
+CarouselColumn,
+ImageCarouselColumn, URITemplateAction)
+
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
 import os
 
@@ -33,17 +43,37 @@ def text_checker(event):
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
         line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="怨靈")
-    )
+        TextSendMessage(text="不愧是怨靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
+    ) 
+        buttons_template = ButtonsTemplate(
+            title="",
+            text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
+            actions=[
+                 URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                MessageTemplateAction(label="世間美好", text="世間美好"),
+            ]
+        )
+
+        # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
     elif len(user_msg) >= 7 and user_msg[4] == "生" and user_msg[5] == "命":
         line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="愁靈")
+        TextSendMessage(text="不愧是愁靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     )
     elif len(user_msg) >= 7 and user_msg[0] == "我" and user_msg[5] == "曾":
         line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="損靈")
+        TextSendMessage(text="不愧是損靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     )
 
 @line_handler.add(FollowEvent)
