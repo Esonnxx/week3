@@ -68,6 +68,44 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text="每個人在經歷被分手都會有不同的反應，因此請您思考一下自己的個性，選擇一個符合您自己的靈種，他將會映射出您自己。")
         )
+        image_carousel_template = ImageCarouselTemplate(
+        columns=[
+            ImageCarouselColumn(
+                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                action=MessageTemplateAction(
+                    label='怨靈',
+                    text='怨靈'
+                )
+            ),
+            ImageCarouselColumn(
+                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                action=MessageTemplateAction(
+                    label='愁靈',
+                    text='愁靈'
+                )
+            ),
+            ImageCarouselColumn(
+                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                action=MessageTemplateAction(
+                    label='損靈',
+                    text='損靈'
+                )
+            ),
+            
+        ]
+    )
+
+    # 建立 Template Message 包含 Image Carousel Template
+    template_message = TemplateSendMessage(
+        alt_text="Welcome to the ChatBot!",
+        template=image_carousel_template
+    )
+
+    # 回傳 Image Carousel Template 給使用者
+    line_bot_api.push_message(
+        event.source.user_id,
+        template_message
+    )
 
 
     if user_message == "同意":
