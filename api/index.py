@@ -94,6 +94,17 @@ def handle_message(event):
             
         ]
     )
+        
+    if user_message == "怨靈":
+        textlist = []
+        first_text = "怨靈不簡單啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
+        sec_text = "我再也無法忍受我們之間的☐☐。愛情已死，而你是☐☐它的☐☐。我不再願意忍受你的☐☐。希望你過得☐☐，不再出現在我的生命中。"
+        textlist.append(TextMessage(first_text))
+        textlist.append(TextMessage(sec_text))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+        )
 
     # 建立 Template Message 包含 Image Carousel Template
     template_message = TemplateSendMessage(
