@@ -46,7 +46,7 @@ def text_checker(event):
         TextSendMessage(text="不愧是怨靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     ) 
         buttons_template = ButtonsTemplate(
-            title="",
+            title="1",
             text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
             actions=[
                  URITemplateAction(label="網站連結", uri="https://www.google.com"),
