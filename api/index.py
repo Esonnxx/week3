@@ -78,6 +78,17 @@ def text_checker(event):
                 MessageTemplateAction(label="世間美好", text="世間美好"),
             ]
         )
+         # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
     elif len(user_msg) >= 7 and user_msg[0] == "我" and user_msg[5] == "曾":
         line_bot_api.reply_message(
         event.reply_token,
@@ -90,6 +101,17 @@ def text_checker(event):
                  URITemplateAction(label="網站連結", uri="https://www.google.com"),
                 MessageTemplateAction(label="世間美好", text="世間美好"),
             ]
+        )
+         # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
         )
 
 @line_handler.add(FollowEvent)
