@@ -105,6 +105,26 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
+    if user_message == "愁靈":
+        textlist = []
+        first_text = "愁靈好啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
+        sec_text = "你曾是我生命中的☐☐，在曾經有你的日子裡我十分的☐☐。但事與願違，你曾在我眼裡是☐☐的存在，如今身分不同了，不會再像以前那樣☐☐。"
+        textlist.append(TextSendMessage(first_text))
+        textlist.append(TextSendMessage(sec_text))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+        )
+    if user_message == "損靈":
+        textlist = []
+        first_text = "損靈呀，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
+        sec_text = "我曾以為你是我一生中☐☐的人，但因為你，如今我彷彿☐☐愛的能力。我以為我們是那麼的☐☐，但看來你並不那麼認為。你想☐☐結束的愛情，那我就成全你吧！"
+        textlist.append(TextSendMessage(first_text))
+        textlist.append(TextSendMessage(sec_text))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+        )
 
     # 建立 Template Message 包含 Image Carousel Template
     template_message = TemplateSendMessage(
