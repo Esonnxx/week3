@@ -124,7 +124,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
-        #text_checker(event)
+        text_checker(event)
     if user_message == "愁靈":
         textlist = []
         first_text = "愁靈好啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
@@ -135,7 +135,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
-        #text_checker(event)
+        text_checker(event)
     if user_message == "損靈":
         textlist = []
         first_text = "損靈呀，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
@@ -146,7 +146,7 @@ def handle_message(event):
         event.reply_token,
         textlist
         )
-        #text_checker(event)
+        text_checker(event)
 
     # 建立 Template Message 包含 Image Carousel Template
     template_message = TemplateSendMessage(
