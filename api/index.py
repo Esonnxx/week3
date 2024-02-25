@@ -151,6 +151,16 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
+    if user_message == "世間美好":
+        textlist = []
+        first_text = "世間美好"
+        sec_text = "世間美好"
+        textlist.append(TextSendMessage(first_text))
+        textlist.append(TextSendMessage(sec_text))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+        )
     if user_message == "Play":
         line_bot_api.reply_message(
             event.reply_token,
