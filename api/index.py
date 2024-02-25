@@ -153,6 +153,28 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
+
+    if user_message == "傳送":
+        buttons_template = ButtonsTemplate(
+            title=" ",
+            text="我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂",
+            actions=[
+                 URITemplateAction(label="報仇靈堂", uri="https://www.google.com"),
+                MessageTemplateAction(label="大仇初報", text="大仇初報"),
+            ]
+        )
+
+        # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
     if user_message == "收下":
         buttons_template = ButtonsTemplate(
             title=" ",
