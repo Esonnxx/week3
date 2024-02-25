@@ -153,6 +153,26 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
+    if user_message == "收下":
+        buttons_template = ButtonsTemplate(
+            title=" ",
+            text="現在請您看著台上正中間的杯子，其實杯子中的倒影正是那位被分手傷得極深的您，如果您能和她說話您想說什麼？",
+            actions=[
+                MessageTemplateAction(label="說完請按一下這裡", text="傳送"),
+            ]
+        )
+
+        # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
     if user_message == "世間美好":
         buttons_template = ButtonsTemplate(
             title=" ",
