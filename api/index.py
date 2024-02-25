@@ -154,24 +154,26 @@ def handle_message(event):
 
     text_checker(event)
     if user_message == "世間美好":
-        confirm_template = ConfirmTemplate(
-            text='您應該記得剛剛抽到的善簽是甚麼顏色，請在中間的杯子抽一根一樣顏色的簽，請您收下這隻簽。',
+        buttons_template = ButtonsTemplate(
+            title="1",
+            text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
             actions=[
-                MessageTemplateAction(
-                    label='收下',
-                    text='收下'
-                ),
-                MessageTemplateAction(
-                    label='不要',
-                    text='不要'
-                )
+                 URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                MessageTemplateAction(label="世間美好", text="世間美好"),
             ]
         )
-        flex_message = FlexSendMessage(alt_text="請收下善簽", contents=confirm_template)
-        line_bot_api.reply_message(
-                event.reply_token,
-                flex_message
-            )
+
+        # 使用 TemplateSendMessage 包裝 ButtonsTemplate
+        template_message = TemplateSendMessage(
+            alt_text="選項",
+            template=buttons_template
+        )
+
+        # 傳送 ButtonsTemplate 給使用者
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
     if user_message == "Play":
         line_bot_api.reply_message(
             event.reply_token,
@@ -292,27 +294,7 @@ def handle_message(event):
             event.reply_token,
             carousel_message
         )
-    # if user_message == "世間美好":
-    #     buttons_template = ButtonsTemplate(
-    #         title="1",
-    #         text="現在請您看著台上正中間的杯子，其實杯子中的倒影正是那位被分手傷得極深的您，如果您能和她說話您想說什麼？",
-    #         actions=[
-    #              URITemplateAction(label="網站連結", uri="https://www.google.com"),
-    #             MessageTemplateAction(label="傳送", text="傳送"),
-    #         ]
-    #     )
-        
-    #     # 使用 TemplateSendMessage 包裝 ButtonsTemplate
-    #     template_message = TemplateSendMessage(
-    #         alt_text="選項",
-    #         template=buttons_template
-    #     )
-
-    #     # 傳送 ButtonsTemplate 給使用者
-    #     line_bot_api.push_message(
-    #         event.source.user_id,
-    #         template_message
-    #     )
+   
         
 
 
