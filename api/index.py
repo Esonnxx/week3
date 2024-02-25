@@ -11,6 +11,7 @@ MessageTemplateAction,
 CarouselTemplate, 
 CarouselColumn,
 ConfirmTemplate,
+FlexSendMessage,
 ImageCarouselColumn, URITemplateAction)
 
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
@@ -166,6 +167,11 @@ def handle_message(event):
                 )
             ]
         )
+        flex_message = FlexSendMessage(alt_text="請收下善簽", contents=confirm_template)
+        line_bot_api.reply_message(
+                event.reply_token,
+                flex_message
+            )
     if user_message == "Play":
         line_bot_api.reply_message(
             event.reply_token,
