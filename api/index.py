@@ -87,7 +87,7 @@ def text_checker(event):
             title="1",
             text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
             actions=[
-                 URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                 URITemplateAction(label="善行靈堂", uri="http://benevolence2.0.s3-website-ap-northeast-1.amazonaws.com"),
                 MessageTemplateAction(label="世間美好", text="世間美好"),
             ]
         )
@@ -266,7 +266,7 @@ def handle_message(event):
         action_label = "大仇初報"
         action_text = "大仇初報"
         url_label = "報仇靈堂"
-        url ="https://www.google.com"
+        url ="https://www.figma.com/proto/pcov5Xttxuhh37z3nomXo1/%E6%83%85%E6%84%9F%E8%91%AC%E5%84%80%E7%A4%BE-%E5%A0%B1%E4%BB%87%E9%9D%88%E5%A0%82?type=design&node-id=1-2&t=PjcxbQRfMEq36a8n-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2"
         template_message = create_buttons_template_with_url(text_to_display,url_label, url, action_label, action_text)
         line_bot_api.push_message(
             event.source.user_id,
