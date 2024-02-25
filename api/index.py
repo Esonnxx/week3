@@ -56,6 +56,23 @@ def create_buttons_template(text, action_label, action_text):
     )
 
     return template_message
+
+def create_buttons_template_withURL(text, action_label, action_text,url_label, url):
+    buttons_template = ButtonsTemplate(
+        title=" ",
+        text=text,
+        actions=[
+            URITemplateAction(label=url_label, uri=url),
+            MessageTemplateAction(label=action_label, text=action_text),
+        ]
+    )
+
+    template_message = TemplateSendMessage(
+        alt_text="選項",
+        template=buttons_template
+    )
+
+    return template_message
 def text_checker(event):
     user_msg=event.message.text
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
@@ -175,7 +192,9 @@ def handle_message(event):
         text_to_display = "我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂"
         action_label = "說完請按一下這裡"
         action_text = "大仇初報"
-        template_message = create_buttons_template(text_to_display, action_label, action_text)
+        url_label = "報仇靈堂"
+        url ="https://www.google.com"
+        template_message = create_buttons_template_withURL(text_to_display, action_label, action_text, url_label, url)
         line_bot_api.push_message(
             event.source.user_id,
             template_message
