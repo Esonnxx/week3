@@ -40,6 +40,22 @@ def callback():
         abort(400)
 
     return 'OK'
+
+def create_buttons_template(text, action_label, action_text):
+    buttons_template = ButtonsTemplate(
+        title=" ",
+        text=text,
+        actions=[
+            MessageTemplateAction(label=action_label, text=action_text),
+        ]
+    )
+
+    template_message = TemplateSendMessage(
+        alt_text="選項",
+        template=buttons_template
+    )
+
+    return template_message
 def text_checker(event):
     user_msg=event.message.text
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
@@ -153,28 +169,19 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
+    
 
     if user_message == "傳送":
-        buttons_template = ButtonsTemplate(
-            title=" ",
-            text="我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂",
-            actions=[
-                 URITemplateAction(label="報仇靈堂", uri="https://www.google.com"),
-                MessageTemplateAction(label="大仇初報", text="大仇初報"),
-            ]
-        )
-
-        # 使用 TemplateSendMessage 包裝 ButtonsTemplate
-        template_message = TemplateSendMessage(
-            alt_text="選項",
-            template=buttons_template
-        )
-
-        # 傳送 ButtonsTemplate 給使用者
+        text_to_display = "我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂"
+        action_label = "說完請按一下這裡"
+        action_text = "大仇初報"
+        template_message = create_buttons_template(text_to_display, action_label, action_text)
         line_bot_api.push_message(
             event.source.user_id,
             template_message
         )
+    
+        
     if user_message == "收下":
         buttons_template = ButtonsTemplate(
             title=" ",
