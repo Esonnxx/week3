@@ -10,6 +10,7 @@ TemplateSendMessage,
 MessageTemplateAction, 
 CarouselTemplate, 
 CarouselColumn,
+ConfirmTemplate,
 ImageCarouselColumn, URITemplateAction)
 
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
@@ -152,14 +153,18 @@ def handle_message(event):
 
     text_checker(event)
     if user_message == "世間美好":
-        textlist = []
-        first_text = "世間美好"
-        sec_text = "世間美好"
-        textlist.append(TextSendMessage(first_text))
-        textlist.append(TextSendMessage(sec_text))
-        line_bot_api.reply_message(
-        event.reply_token,
-        textlist
+        confirm_template = ConfirmTemplate(
+            text='您應該記得剛剛抽到的善簽是甚麼顏色，請在中間的杯子抽一根一樣顏色的簽，請您收下這隻簽。',
+            actions=[
+                MessageTemplateAction(
+                    label='收下',
+                    text='收下'
+                ),
+                MessageTemplateAction(
+                    label='不要',
+                    text='不要'
+                )
+            ]
         )
     if user_message == "Play":
         line_bot_api.reply_message(
