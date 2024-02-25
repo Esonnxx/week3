@@ -198,7 +198,7 @@ def handle_message(event):
         textlist = []
         first_text = "請您將剛剛調配的藥水擺在正前方，接下來的問題，如果您回答不出來，請拿攪拌棒滑過杯口一圈，並敲出清脆的一聲"
         sec_text = "必須滿足哪三個基本條件，你才覺得被愛？"
-        third_txt ="首先是 ☐☐`\n`次要是 ☐☐`\n`一定要 ☐☐"
+        third_txt ="首先是 ☐☐\n次要是 ☐☐\n一定要 ☐☐"
         textlist.append(TextSendMessage(first_text))
         textlist.append(TextSendMessage(sec_text))
         textlist.append(TextSendMessage(third_txt))
