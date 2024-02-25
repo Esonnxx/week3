@@ -57,22 +57,22 @@ def create_buttons_template(text, action_label, action_text):
 
     return template_message
 
-def create_buttons_template_withURL(text, action_label, action_text,url_label, url):
-    buttons_template = ButtonsTemplate(
-        title=" ",
-        text=text,
-        actions=[
-            URITemplateAction(label=url_label, uri=url),
-            MessageTemplateAction(label=action_label, text=action_text),
-        ]
-    )
+# def create_buttons_template_withURL(text, action_label, action_text,url_label, url):
+#     buttons_template = ButtonsTemplate(
+#         title=" ",
+#         text=text,
+#         actions=[
+#             URITemplateAction(label=url_label, uri=url),
+#             MessageTemplateAction(label=action_label, text=action_text),
+#         ]
+#     )
 
-    template_message = TemplateSendMessage(
-        alt_text="選項",
-        template=buttons_template
-    )
+#     template_message = TemplateSendMessage(
+#         alt_text="選項",
+#         template=buttons_template
+#     )
 
-    return template_message
+#     return template_message
 def text_checker(event):
     user_msg=event.message.text
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
