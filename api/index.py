@@ -75,22 +75,7 @@ def create_buttons_template_with_url(text, label_url,url, action_label, action_t
     return template_message
 
 
-# def create_buttons_template_withURL(text, action_label, action_text,url_label, url):
-#     buttons_template = ButtonsTemplate(
-#         title=" ",
-#         text=text,
-#         actions=[
-#             URITemplateAction(label=url_label, uri=url),
-#             MessageTemplateAction(label=action_label, text=action_text),
-#         ]
-#     )
 
-#     template_message = TemplateSendMessage(
-#         alt_text="選項",
-#         template=buttons_template
-#     )
-
-#     return template_message
 def text_checker(event):
     user_msg=event.message.text
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
@@ -166,6 +151,11 @@ def text_checker(event):
             event.source.user_id,
             template_message
         )
+    elif len(user_msg) >= 7 and user_msg[0] == "首" and user_msg[1] == "先" and user_msg[2] == "是":
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="你知道分手的原因嗎？`\n`分手的原因是......")
+    )
 
 @line_handler.add(FollowEvent)
 def handle_follow(event):
@@ -204,11 +194,23 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
-    
+    if user_message == "大仇初報":
+        textlist = []
+        first_text = "請您將剛剛調配的藥水擺在正前方，接下來的問題，如果您回答不出來，請拿攪拌棒滑過杯口一圈，並敲出清脆的一聲"
+        sec_text = "必須滿足哪三個基本條件，你才覺得被愛？"
+        third_txt ="首先是 ☐☐`\n`次要是 ☐☐`\n`一定要 ☐☐"
+        textlist.append(TextSendMessage(first_text))
+        textlist.append(TextSendMessage(sec_text))
+        textlist.append(TextSendMessage(third_txt))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+        )
+
 
     if user_message == "傳送":
         text_to_display = "我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂"
-        action_label = "說完請按一下這裡"
+        action_label = "大仇初報"
         action_text = "大仇初報"
         url_label = "報仇靈堂"
         url ="https://www.google.com"
