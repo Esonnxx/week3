@@ -158,8 +158,7 @@ def handle_message(event):
             title=" ",
             text="您應該記得剛剛抽到的善簽是甚麼顏色，請在中間的杯子抽一根一樣顏色的簽，請您收下這隻簽。",
             actions=[
-                URITemplateAction(label="網站連結", uri="https://www.google.com"),
-                MessageTemplateAction(label="世間美好", text="世間美好"),
+                MessageTemplateAction(label="收下", text="收下"),
             ]
         )
 
