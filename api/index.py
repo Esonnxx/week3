@@ -192,9 +192,9 @@ def handle_message(event):
         text_to_display = "我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂"
         action_label = "說完請按一下這裡"
         action_text = "大仇初報"
-        url_label = "報仇靈堂"
-        url ="https://www.google.com"
-        template_message = create_buttons_template_withURL(text_to_display, action_label, action_text, url_label, url)
+        #url_label = "報仇靈堂"
+        #url ="https://www.google.com"
+        template_message = create_buttons_template(text_to_display, action_label, action_text)
         line_bot_api.push_message(
             event.source.user_id,
             template_message
