@@ -155,10 +155,11 @@ def handle_message(event):
     text_checker(event)
     if user_message == "世間美好":
         buttons_template = ButtonsTemplate(
-            title="",
+            title="1",
             text="您應該記得剛剛抽到的善簽是甚麼顏色，請在中間的杯子抽一根一樣顏色的簽，請您收下這隻簽。",
             actions=[
-                MessageTemplateAction(label="收下", text="收下"),
+                URITemplateAction(label="網站連結", uri="https://www.google.com"),
+                MessageTemplateAction(label="世間美好", text="世間美好"),
             ]
         )
 
