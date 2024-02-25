@@ -218,7 +218,7 @@ def handle_follow(event):
     image_carousel_template = ImageCarouselTemplate(
     columns=[
         ImageCarouselColumn(
-            image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
+            image_url="https://i.ibb.co/K7qPXfF/image.png",  # Replace with your image URL
             action=MessageTemplateAction(
                 label='Play',
                 text='Play'
