@@ -168,8 +168,8 @@ def text_checker(event):
       and user_msg[0] == "分"
       and user_msg[1] == "手"
       and user_msg[2] == "的"
-      and user_msg[2] == "原"
-      and user_msg[2] == "因"):
+      and user_msg[3] == "原"
+      and user_msg[4] == "因"):
         textlist = []
         first_text = "一切都不容易對吧！儀式所需的道具基本集齊了，最後一個問題"
         sec_text = "如果你穿越時空回到過去，你和他初次約會的地方，你會想和那時候的自己說甚麼？"
