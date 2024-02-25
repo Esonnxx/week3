@@ -154,8 +154,61 @@ def text_checker(event):
     elif len(user_msg) >= 7 and user_msg[0] == "首" and user_msg[1] == "先" and user_msg[2] == "是":
         line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="你知道分手的原因嗎？`\n`分手的原因是......")
+        TextSendMessage(text="你知道分手的原因嗎？\n分手的原因是......")
     )
+    elif (len(user_msg) >= 7
+      and user_msg[0] == "首"
+      and user_msg[1] == "先"
+      and user_msg[2] == "是"):
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="你知道分手的原因嗎？\n分手的原因是......")
+    )
+    elif (len(user_msg) >= 7
+      and user_msg[0] == "分"
+      and user_msg[1] == "手"
+      and user_msg[2] == "的"
+      and user_msg[2] == "原"
+      and user_msg[2] == "因"):
+        textlist = []
+        first_text = "一切都不容易對吧！儀式所需的道具基本集齊了，最後一個問題"
+        sec_text = "如果你穿越時空回到過去，你和他初次約會的地方，你會想和那時候的自己說甚麼？"
+        third_txt ="開頭：我想說......"
+        textlist.append(TextSendMessage(first_text))
+        textlist.append(TextSendMessage(sec_text))
+        textlist.append(TextSendMessage(third_txt))
+        line_bot_api.reply_message(
+        event.reply_token,
+        textlist
+    )
+    elif (len(user_msg) >= 7
+      and user_msg[0] == "我"
+      and user_msg[1] == "想"
+      and user_msg[2] == "說"):
+        image_carousel_template = ImageCarouselTemplate(
+        columns=[
+            ImageCarouselColumn(
+                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
+                action=MessageTemplateAction(
+                    label='Pray',
+                    text='Pray'
+            )
+        ),
+    ]
+)
+# Create Template Message with Image Carousel Template
+        template_message = TemplateSendMessage(
+            alt_text="Welcome to the ChatBot!",
+            template=image_carousel_template
+        )
+
+# Send the Image Carousel Template message to the user
+        line_bot_api.reply_message(
+        event.reply_token,
+        template_message
+    )
+        
+    
 
 @line_handler.add(FollowEvent)
 def handle_follow(event):
