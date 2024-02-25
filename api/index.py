@@ -57,6 +57,24 @@ def create_buttons_template(text, action_label, action_text):
 
     return template_message
 
+def create_buttons_template_with_url(text, label_url,url, action_label, action_text):
+    buttons_template = ButtonsTemplate(
+        title=" ",
+        text=text,
+        actions=[
+            URITemplateAction(label=label_url, uri=url),
+            MessageTemplateAction(label=action_label, text=action_text),
+        ]
+    )
+
+    template_message = TemplateSendMessage(
+        alt_text="選項",
+        template=buttons_template
+    )
+
+    return template_message
+
+
 # def create_buttons_template_withURL(text, action_label, action_text,url_label, url):
 #     buttons_template = ButtonsTemplate(
 #         title=" ",
