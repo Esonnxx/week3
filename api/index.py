@@ -84,7 +84,7 @@ def text_checker(event):
         TextSendMessage(text="不愧是怨靈，既然決定要怨恨希望你能堅定自己的決定，當然大多數選擇怨靈的都是一條路走到黑的。")
     ) 
         buttons_template = ButtonsTemplate(
-            title="1",
+            title=" ",
             text="但為了防止您走火入魔，因此需要請您先進入善行靈堂，當你完成請按下世間美好",
             actions=[
                  URITemplateAction(label="善行靈堂", uri="http://benevolence2.0.s3-website-ap-northeast-1.amazonaws.com"),
@@ -188,11 +188,13 @@ def text_checker(event):
         image_carousel_template = ImageCarouselTemplate(
         columns=[
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # Replace with your image URL
-                action=MessageTemplateAction(
-                    label='Pray',
-                    text='Pray'
-            )
+                image_url="https://i.ibb.co/1GBYvZn/image.png",
+                  # Replace with your image URL
+                  
+                action=[
+                    URITemplateAction(label="超度靈堂", uri="https://www.figma.com/proto/FmiYHeMnT5vqLzKovBTeSN/%E6%83%85%E6%84%9F%E8%91%AC%E5%84%80%E7%A4%BE-%E8%B6%85%E6%B8%A1%E9%9D%88%E5%A0%82?scaling=scale-down&page-id=0%3A1&node-id=56-2&starting-point-node-id=56%3A2"),
+                    MessageTemplateAction(label='Pray',text='Pray')
+                ]
         ),
     ]
 )
@@ -322,21 +324,21 @@ def handle_message(event):
         image_carousel_template = ImageCarouselTemplate(
         columns=[
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='怨靈',
                     text='怨靈'
                 )
             ),
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='愁靈',
                     text='愁靈'
                 )
             ),
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/PYmQNYd/image.jpg",  # 替換成您的圖片網址
+                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='損靈',
                     text='損靈'
