@@ -190,11 +190,8 @@ def text_checker(event):
             ImageCarouselColumn(
                 image_url="https://i.ibb.co/1GBYvZn/image.png",
                   # Replace with your image URL
-                  
-                action=[
-                    URITemplateAction(label="超度靈堂", uri="https://www.figma.com/proto/FmiYHeMnT5vqLzKovBTeSN/%E6%83%85%E6%84%9F%E8%91%AC%E5%84%80%E7%A4%BE-%E8%B6%85%E6%B8%A1%E9%9D%88%E5%A0%82?scaling=scale-down&page-id=0%3A1&node-id=56-2&starting-point-node-id=56%3A2"),
-                    MessageTemplateAction(label='Pray',text='Pray')
-                ]
+                action=MessageTemplateAction(label='Pray',text='Pray')
+                
         ),
     ]
 )
