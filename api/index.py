@@ -246,6 +246,19 @@ def handle_message(event):
     user_message = event.message.text
 
     text_checker(event)
+
+    if user_message == "Pray":
+        text_to_display = "一切即將結束"
+        action_label = "超渡靈堂"
+        action_text = "超渡靈堂"
+        url_label = "超渡靈堂"
+        url ="https://www.figma.com/proto/FmiYHeMnT5vqLzKovBTeSN/%E6%83%85%E6%84%9F%E8%91%AC%E5%84%80%E7%A4%BE-%E8%B6%85%E6%B8%A1%E9%9D%88%E5%A0%82?scaling=scale-down&page-id=0%3A1&node-id=56-2&starting-point-node-id=56%3A2"
+        template_message = create_buttons_template_with_url(text_to_display,url_label, url, action_label, action_text)
+        line_bot_api.push_message(
+            event.source.user_id,
+            template_message
+        )
+
     if user_message == "大仇初報":
         textlist = []
         first_text = "請您將剛剛調配的藥水擺在正前方，接下來的問題，如果您回答不出來，請拿攪拌棒滑過杯口一圈，並敲出清脆的一聲"
