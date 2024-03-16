@@ -363,21 +363,21 @@ def handle_message(event):
         image_carousel_template = ImageCarouselTemplate(
         columns=[
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
+                image_url="https://res.cloudinary.com/debk3y68m/image/upload/v1710601125/ntut/vzoc3cnbtr0g15g4ljio.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='怨靈',
                     text='怨靈'
                 )
             ),
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
+                image_url="https://res.cloudinary.com/debk3y68m/image/upload/v1710601125/ntut/yyd2ix5esdz0xxacbxly.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='愁靈',
                     text='愁靈'
                 )
             ),
             ImageCarouselColumn(
-                image_url="https://i.ibb.co/C2H1JmK/image.png",  # 替換成您的圖片網址
+                image_url="https://res.cloudinary.com/debk3y68m/image/upload/v1710601125/ntut/uvmgdvrdg2tpksnswozl.png",  # 替換成您的圖片網址
                 action=MessageTemplateAction(
                     label='損靈',
                     text='損靈'
