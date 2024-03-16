@@ -15,11 +15,14 @@ FlexSendMessage,
 ImageCarouselColumn, URITemplateAction)
 
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
+from api.chatgpt import ChatGPT
 import os
 
 app = Flask(__name__)
 line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
+working_status = os.getenv("DEFALUT_TALKING", default = "false").lower() == "false"
+chatgpt = ChatGPT()
 
 # domain root
 @app.route('/')
@@ -242,7 +245,33 @@ def handle_follow(event):
 
 
 def handle_message(event):
-    user_id = event.source.user_id
+    global working_status
+    if event.message.type != "text":
+        return
+    
+    if event.message.text == "跟我聊聊":
+        working_status = True
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="哈囉你好"))
+        return
+    if event.message.text == "STFU":
+        working_status = False
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="我閉嘴"))
+        return
+    
+    if working_status:
+        chatgpt.add_msg(f"HUMAN:{event.message.text}?\n")
+        reply_msg = chatgpt.get_response().replace("AI:", "", 1)
+        chatgpt.add_msg(f"AI:{reply_msg}\n")
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=reply_msg))
+    
+
+
     user_message = event.message.text
 
     text_checker(event)
