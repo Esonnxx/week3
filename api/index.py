@@ -22,7 +22,7 @@ line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 line_handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 working_status = False
 
-
+ 
 chatgpt = ChatGPT()
 
 
@@ -82,6 +82,7 @@ def create_buttons_template_with_url(text, label_url,url, action_label, action_t
 
 
 def text_checker(event):
+    working_status =False
     user_msg=event.message.text
     if len(user_msg) >= 7 and user_msg[5] == "忍" and user_msg[6] == "受":
         line_bot_api.reply_message(
@@ -254,17 +255,17 @@ def handle_message(event):
     
     
     
-    if event.message.text == "跟我聊聊":
+    if event.message.text == "呼叫專員":
         working_status = True
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="哈囉你好"))
+            TextSendMessage(text="哈囉你好，請問您有什麼感情上的困擾嗎?"))
         return
-    if event.message.text == "STFU":
+    if event.message.text == "謝謝專員":
         working_status = False
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="我閉嘴"))
+            TextSendMessage(text="歡迎再來找我"))
         return
     
     if working_status:
@@ -282,6 +283,7 @@ def handle_message(event):
     text_checker(event)
 
     if user_message == "Pray":
+        working_status = False
         text_to_display = "一切即將結束"
         action_label = "超渡靈堂"
         action_text = "超渡靈堂"
@@ -294,6 +296,7 @@ def handle_message(event):
         )
 
     if user_message == "大仇初報":
+        working_status = False
         textlist = []
         first_text = "請您將剛剛調配的藥水擺在正前方，接下來的問題，如果您回答不出來，請拿攪拌棒滑過杯口一圈，並敲出清脆的一聲"
         sec_text = "必須滿足哪三個基本條件，你才覺得被愛？"
@@ -308,6 +311,7 @@ def handle_message(event):
 
 
     if user_message == "傳送":
+        working_status = False
         text_to_display = "我們已將這句話傳達給那個您了，接下來請您移步報仇靈堂"
         action_label = "大仇初報"
         action_text = "大仇初報"
@@ -321,6 +325,7 @@ def handle_message(event):
     
         
     if user_message == "收下":
+        working_status = False
         buttons_template = ButtonsTemplate(
             title=" ",
             text="現在請您看著台上正中間的杯子，其實杯子中的倒影正是那位被分手傷得極深的您，如果您能和她說話您想說什麼？",
@@ -341,6 +346,7 @@ def handle_message(event):
             template_message
         )
     if user_message == "世間美好":
+        working_status = False
         buttons_template = ButtonsTemplate(
             title=" ",
             text="您應該記得剛剛抽到的善簽是甚麼顏色，請在中間的杯子抽一根一樣顏色的簽，請您收下這隻簽。",
@@ -361,6 +367,7 @@ def handle_message(event):
             template_message
         )
     if user_message == "Play":
+        working_status = False
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="每個人在經歷被分手都會有不同的反應，因此請您思考一下自己的個性，選擇一個符合您自己的靈種，他將會映射出您自己。")
@@ -393,6 +400,7 @@ def handle_message(event):
     )
         
     if user_message == "怨靈":
+        working_status = False
         textlist = []
         first_text = "怨靈不簡單啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
         sec_text = "我再也無法忍受我們之間的☐☐。愛情已死，而你是☐☐它的☐☐。我不再願意忍受你的☐☐。希望你過得☐☐，不再出現在我的生命中。"
@@ -404,6 +412,7 @@ def handle_message(event):
         )
         
     if user_message == "愁靈":
+        working_status = False
         textlist = []
         first_text = "愁靈好啊，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
         sec_text = "你曾是我生命中的☐☐，在曾經有你的日子裡我十分的☐☐。但事與願違，你曾在我眼裡是☐☐的存在，如今身分不同了，不會再像以前那樣☐☐。"
@@ -415,6 +424,7 @@ def handle_message(event):
         )
         
     if user_message == "損靈":
+        working_status = False
         textlist = []
         first_text = "損靈呀，無論你是如何的，我們都會發揮完全的專業來超渡您。由於我們還不認識您，因此需要您提供一封休書，下面是休書的格式。*請您複製此格式並在框框中填入資料後回傳，過程中務必跟著心走。"
         sec_text = "我曾以為你是我一生中☐☐的人，但因為你，如今我彷彿☐☐愛的能力。我以為我們是那麼的☐☐，但看來你並不那麼認為。你想☐☐結束的愛情，那我就成全你吧！"
@@ -440,7 +450,7 @@ def handle_message(event):
 
 
     if user_message == "同意":
-        # Customize your Carousel Template here
+        working_status = False
         carousel_template = CarouselTemplate(
             columns=[
                 CarouselColumn(
