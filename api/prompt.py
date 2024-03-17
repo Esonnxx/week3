@@ -8,7 +8,7 @@ LANGUAGE_TABLE = {
   "en": "Hello!"
 }
 
-AI_GUIDELINES = '你是一個AI心理諮商師，幫助使用者走出失戀的痛'
+AI_GUIDELINES = '你是一個AI心理諮商師，幫助我走出失戀的痛'
 
 class Prompt:
     def __init__(self):
