@@ -269,7 +269,7 @@ def handle_message(event):
                 items=[
                     QuickReplyButton(action=MessageAction(label="跟我聊聊", text="跟我聊聊")),
                     QuickReplyButton(action=MessageAction(label="謝謝專員", text="謝謝專員"))]))
-        return
+        
     if event.message.text == "跟我聊聊":
         working_status =True
         line_bot_api.reply_message(
