@@ -260,15 +260,16 @@ def handle_message(event):
     
     
     
-    if msg == "呼叫專員":
+    if event.message.text == "呼叫專員":
         working_status = True
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="請問有甚麼需要協助的嗎?"),
-            quick_reply = QuickReply(
-                items=[
-                    QuickReplyButton(action=MessageAction(label="跟我聊聊", text="跟我聊聊")),
-                    QuickReplyButton(action=MessageAction(label="謝謝專員", text="謝謝專員"))]))
+        quick_reply = QuickReply(
+        items=[
+            QuickReplyButton(action=MessageAction(label="跟我聊聊", text="跟我聊聊")),
+            QuickReplyButton(action=MessageAction(label="謝謝專員", text="謝謝專員"))
+        ]
+    )
+    reply_message = TextSendMessage(text="請問有什麼需要協助的嗎?", quick_reply=quick_reply)
+    line_bot_api.reply_message(event.reply_token, reply_message)
         
     if event.message.text == "跟我聊聊":
         working_status =True
