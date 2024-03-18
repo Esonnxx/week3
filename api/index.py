@@ -12,7 +12,11 @@ CarouselTemplate,
 CarouselColumn,
 ConfirmTemplate,
 FlexSendMessage,
-ImageCarouselColumn, URITemplateAction)
+ImageCarouselColumn, 
+URITemplateAction,
+QuickReply, 
+QuickReplyButton,
+MessageAction)
 from linebot.models.events import FollowEvent, MessageEvent, TextMessage
 from api.chatgpt import ChatGPT
 import os
@@ -256,7 +260,17 @@ def handle_message(event):
     
     
     if event.message.text == "呼叫專員":
-        working_status = True
+        working_status = False
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請問有甚麼需要協助的嗎?"),
+            quick_reply = QuickReply(
+                items=[
+                    QuickReplyButton(action=MessageAction(label="跟我聊聊", text="跟我聊聊")),
+                    QuickReplyButton(action=MessageAction(label="謝謝專員", text="謝謝專員"))]))
+        return
+    if event.message.text == "跟我聊聊":
+        working_status =True
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="哈囉你好，請問您有什麼感情上的困擾嗎?"))
