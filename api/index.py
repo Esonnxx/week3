@@ -268,8 +268,8 @@ def handle_message(event):
             QuickReplyButton(action=MessageAction(label="謝謝專員", text="謝謝專員"))
         ]
     )
-    reply_message = TextSendMessage(text="請問有什麼需要協助的嗎?", quick_reply=quick_reply)
-    line_bot_api.reply_message(event.reply_token, reply_message)
+        reply_message = TextSendMessage(text="請問有什麼需要協助的嗎?", quick_reply=quick_reply)
+        line_bot_api.reply_message(event.reply_token, reply_message)
         
     if event.message.text == "跟我聊聊":
         working_status =True
