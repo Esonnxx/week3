@@ -253,14 +253,15 @@ def handle_follow(event):
 
 def handle_message(event):
     global working_status 
+    msg = event.message.text
     
     if event.message.type != "text":
         return
     
     
     
-    if event.message.text == "呼叫專員":
-        working_status = False
+    if msg == "呼叫專員":
+        working_status = True
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請問有甚麼需要協助的嗎?"),
